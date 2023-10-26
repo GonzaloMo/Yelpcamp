@@ -13,10 +13,9 @@ const session = require('express-session'); // To use sessions
 const flash = require('connect-flash'); // To use flash messages
 const mongoSanitize = require('express-mongo-sanitize'); // To sanitize user input
 const helmet = require('helmet'); // To use helmet
-const { scriptSrcUrls, styleSrcUrls, connectSrcUrls, fontSrcUrls } = require('./utils/permisions'); // To use helmet
+// const { scriptSrcUrls, styleSrcUrls, connectSrcUrls, fontSrcUrls } = require('./utils/permisions'); // To use helmet
 
 const ExpressError = require('./utils/ExpressError'); // To throw errors
-const { campgroundSchema, reviewSchema } = require('./schemas.js'); // To validate data
 const passport = require('passport'); // To use passport
 const LocalStrategy = require('passport-local'); // To use passport-local
 const User = require('./models/user'); // To use the User model
@@ -88,6 +87,29 @@ app.use(session(sessionConfig));
 app.use(flash()); // To use flash messages
 app.use(helmet()); // To use helmet
 
+const scriptSrcUrls = [
+    "https://stackpath.bootstrapcdn.com/",
+    "https://api.tiles.mapbox.com/",
+    "https://api.mapbox.com/",
+    "https://kit.fontawesome.com/",
+    "https://cdnjs.cloudflare.com/",
+    "https://cdn.jsdelivr.net",
+];
+const styleSrcUrls = [
+    "https://kit-free.fontawesome.com/",
+    "https://stackpath.bootstrapcdn.com/",
+    "https://api.mapbox.com/",
+    "https://api.tiles.mapbox.com/",
+    "https://fonts.googleapis.com/",
+    "https://use.fontawesome.com/",
+];
+const connectSrcUrls = [
+    "https://api.mapbox.com/",
+    "https://a.tiles.mapbox.com/",
+    "https://b.tiles.mapbox.com/",
+    "https://events.mapbox.com/",
+];
+const fontSrcUrls = [];
 app.use(
     helmet.contentSecurityPolicy({
         directives: {
