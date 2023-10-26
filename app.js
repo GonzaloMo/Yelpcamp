@@ -57,11 +57,13 @@ app.use(mongoSanitize()); // To sanitize user input
 
 
 // Session Setup
+const secret = process.env.SECRET
+const sessionName = process.env.SESSION_NAME
 const store = MongoStore.create({
     mongoUrl: dbURL,
     touchAfter: 24 * 60 * 60, // In seconds
     crypto: {
-        secret: 'thisshouldbeabettersecret!'
+        secret: secret
     }
 });
 
@@ -71,8 +73,8 @@ store.on('error', function(e) {
 
 const sessionConfig = {
     store,
-    name: "MySession",
-    secret: "Betterkeepthissecret",
+    name: sessionName,
+    secret: secret,
     resave: false,
     saveUninitialized: true,
     cookie: {
