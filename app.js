@@ -28,7 +28,7 @@ const User = require('./models/user'); // To use the User model
 const campgrounds = require('./routers/campgrounds');   
 const reviews = require('./routers/reviews');
 const users = require('./routers/users');
-const dbURL = 'mongodb://127.0.0.1:27017/yelp-camp'; //  process.env.DB_URL
+const dbURL = process.env.DB_URL; // 'mongodb://127.0.0.1:27017/yelp-camp'; //  process.env.DB_URL;
 
 // Connect to the database
 mongoose.connect(dbURL, { 
